@@ -13,10 +13,13 @@
 </body>
 <script>
 
-    let score = {
-        wins: 0,
-        losses: 0
-    };
+    let score =
+        JSON.parse(localStorage.getItem('score')) || {
+            wins: 0,
+            losses: 0
+        };
+
+    // localStorage.getItem('score');
 
     function playerMove(guess) {
         const computerMove = computerPick();
@@ -35,6 +38,8 @@
                 result = 'You lose.';
             }
         }
+
+        localStorage.setItem('score', JSON.stringify(score));
 
         if (result === 'You win.') {
             score.wins += 1;
